@@ -1,0 +1,68 @@
+package com.jakub;
+
+import java.util.Scanner;
+
+public class user {
+
+    //These are the variables that will be used in each method, the scanner will be used to fill these variables by the user.
+
+    String userName;
+    String checkUserName;
+    int userAge;
+    int userID;
+    String userPassword;
+    String checkedPassword;
+    Scanner s1 = new Scanner(System.in);
+
+    //This first method simply allows the user to set the variable username to whatever they want.
+
+    public void setUserName() {
+        System.out.println("Please enter you name:");
+        userName = s1.next();
+        System.out.printf("Hello %s%n", userName);
+    }
+
+    //This second method simply allows the user to set their password to whatever they wish
+
+    public void createPassword() {
+        System.out.printf("Now please enter a password:%n");
+        userPassword = s1.next();
+    }
+
+    //This next method, makes the user re-enter their password just to clarify what the password is.
+    //This is achieved with a while loop whose conditions of both password variables not matching must be broken before the while loop can be escaped.
+    //The checkedPassword variable is then also set to null, so it can be used in future conditional statements.
+
+    public void passwordChecker() {
+        System.out.printf("Now please re-enter your password:%n");
+        while (userPassword.equals(checkedPassword) == false) {
+            if ((checkedPassword = s1.next()).equals(userPassword)) {
+                System.out.printf("Your password matches, welcome %s.%n%n%n%n", userName);
+            } else {
+                System.out.printf("Your password does not match, please re-enter:%n");
+            }
+        }
+        checkedPassword = null;
+    }
+
+    //This final method is a combination of both previous while loops.
+    //The user must match their input to both the username and password variables to break both while loops and login.
+
+    public void userLogin() {
+        System.out.printf("To login, please enter you username:%n");
+        while (userName.equals(checkUserName) == false) {
+            if ((checkUserName = s1.next()).equals(userName)) {
+                System.out.printf("Now please enter your password:%n");
+            } else {
+                System.out.printf("That user name does not exist on our database, please try again:%n");
+            }
+        }
+        while (userPassword.equals(checkedPassword) == false) {
+            if ((checkedPassword = s1.next()).equals(userPassword)) {
+                System.out.printf("Welcome to your account %s, you are now officially logged in.%n", userName);
+            } else {
+                System.out.printf("That is not the correct password for this username, please try again:%n");
+            }
+        }
+    }
+}
